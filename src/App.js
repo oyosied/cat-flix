@@ -1,4 +1,4 @@
-import { Route, Routes,  Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import React from "react";
 import CatVideos from "./components/Pages/CatVideos";
 import NavigationBar from "./components/Layout/NavigationBar";
@@ -6,6 +6,7 @@ import VideoUpload from "./components/Pages/VideoUpload";
 import { AuthContext } from "./store/auth-context";
 import { useAuth } from "./store/auth-hook";
 import LoginPage from "./components/Pages/LoginPage";
+import HomePage from "./components/Pages/HomePage";
 
 //import './components/UI/Spinner/Spinner.module.css';
 function App() {
@@ -26,12 +27,15 @@ function App() {
     );
   } else {
     routes = (
-      <Routes>
-        <Route path="/login" element={<LoginPage></LoginPage>} />
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
+      <React.Fragment>
+        <Routes>
+          <Route path="/login" element={<LoginPage></LoginPage>} />
+        </Routes>
+        <HomePage></HomePage>
+      </React.Fragment>
     );
   }
+
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     setShowSpinner(false);

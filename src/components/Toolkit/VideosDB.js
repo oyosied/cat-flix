@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getVideosByCategory = async (token) => {
+export const getVideos = async (token) => {
   const response = await fetch("http://localhost:8000/cat-videos/videos", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -9,7 +9,16 @@ export const getVideosByCategory = async (token) => {
   const data = await response.json();
   return data;
 };
-export const deleteVideoByID = () => {};
+export const deleteVideoByID =async (token,videoId) => {
+  const response = await fetch("http://localhost:8000/cat-videos/videos/"+videoId, {
+    method:"DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+  return data;
+};
 export const updateVideoByID = () => {};
 export const getMyVideos = async (token) => {
   const response = await fetch("http://localhost:8000/cat-videos/myvideos", {
@@ -40,6 +49,7 @@ export const uploadVideo = (
 ) => {
   console.log(file, thumbnail, description, category, userId, token);
   const formData = new FormData();
+  console.log(file);
   formData.append("file", file);
   formData.append("thumbnail", thumbnail);
   formData.append("name", name);

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { DefaultPlayer as Video } from "react-html5video";
-import "react-html5video/dist/styles.css";
-import { getVideosByCategory } from "../Toolkit/VideosDB";
+import { getVideos } from "../Toolkit/VideosDB";
 import { AuthContext } from "../../store/auth-context";
 import MLogoPic from "../../images/Main_cat.png";
 import Spinner from "../UI/Spinner/Spinner";
+import VideoContainer from "../Toolkit/VideoContainer";
 
 const CatVideos = () => {
-  const [videoList, setvideoList] = useState(null);
+  const [videoList, setvideoList] = useState([]);
   const [showSpinner, setShowSpinner] = useState(true);
   const loadingHandler = () => {
     setShowSpinner((prevState) => !prevState);
@@ -15,13 +14,13 @@ const CatVideos = () => {
   const auth = useContext(AuthContext);
   useEffect(() => {
     const dataset = async () => {
-      const data = await getVideosByCategory(auth.token);
+      const data = await getVideos(auth.token);
       setvideoList(data);
       loadingHandler();
     };
     dataset();
     return () => {
-      setvideoList(null);
+      setvideoList([]);
     };
   }, [setvideoList, auth.token]);
   // const videoFinish = () => {
@@ -29,13 +28,9 @@ const CatVideos = () => {
   // };
   return (
     <div>
-      {showSpinner && (
-        <div style={{ textAlign: "center", marginTop: "10%" }}>
-          <Spinner img={MLogoPic} />
-        </div>
-      )}
+      {showSpinner && !videoList && <Spinner img={MLogoPic} />}
 
-      {videoList != null && (
+      {videoList != null && videoList.length!==0 && (
         <React.Fragment>
           {videoList.map((category) => {
             return (
@@ -43,35 +38,22 @@ const CatVideos = () => {
                 <h2>{Object.keys(category)}</h2>
                 {category[Object.keys(category)].map((video) => {
                   return (
-                    <Video
+                    <VideoContainer
                       key={video._id}
-                      autoPlay
-                      loop
-                      muted
-                      controls={[
-                        "PlayPause",
-                        "Seek",
-                        "Time",
-                        "Volume",
-                        "Fullscreen",
-                      ]}
-                    >
-                      <source
-                        src={
-                          "http://localhost:8000/cat-videos/videos/" +
-                          video.VideoFileID +
-                          "?token=" +
-                          auth.token
-                        }
-                        type={video.contentType}
-                      />
-                    </Video>
+                      video={video}
+                      token={auth.token}
+                    ></VideoContainer>
                   );
                 })}
+                
               </div>
             );
           })}
         </React.Fragment>
+      )}
+      {(videoList.length===0 && !showSpinner) && (
+        
+        <p>No videos uploaded yet{console.log(videoList)}</p>
       )}
     </div>
   );

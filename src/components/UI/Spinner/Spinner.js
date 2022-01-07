@@ -14,14 +14,14 @@ const Spinner = (props) => {
   }, [Timer]);
 
   return (
-    <React.Fragment>
+    <div style={{ textAlign: "center", marginTop: "10%" }}>
       <img
         style={{ animation: `${classes.spin} ${Timer}s linear infinite` }}
         src={props.img}
         alt="img"
       />
-      <h2 style={{marginTop:"5rem"}}>Loading .....</h2>
-    </React.Fragment>
+      <h2 style={{ marginTop: "5rem" }}>Loading .....</h2>
+    </div>
   );
 };
 

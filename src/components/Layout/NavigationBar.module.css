@@ -12,6 +12,7 @@
   height: auto;
   float: left;
   padding-right: 2rem;
+  cursor: pointer;
 }
 .nav_bar ul {
   padding: 0;

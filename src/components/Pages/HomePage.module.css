@@ -1,0 +1,50 @@
+.nav_bar p {
+  display: inline-block;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 29px;
+  /* identical to box height */
+  background: linear-gradient(90deg, #15138e 0%, #da5151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+}
+.nav_bar button {
+  display: block;
+  float: right;
+  margin: 1rem 1rem 1rem 1rem;
+  overflow: hidden;
+}
+.nav_bar div {
+  height: 70px;
+  left: 0px;
+  top: 0px;
+
+  background: #ffffff;
+  border-radius: 0px 0px 15px 15px;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main div{
+    margin: 4rem 0 2rem 2rem ;
+    display: inline-block;
+}
+.main img{
+    float: right;
+}
+.main_title{
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  letter-spacing: -0.03em;
+  margin:0;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #15138e 0%, #da5151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
